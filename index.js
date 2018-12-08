@@ -1,9 +1,13 @@
 const express = require('express');
 const helmet = require('helmet');
 const logger = require('morgan');
-const server = express();
-
 const cors = require('cors');
+
+
+const actionRouter = require('./routes/action_routes');
+const projectRouter = require('./routes/project_routes');
+
+const server = express();
 
 server.use(
     express.json(),
@@ -12,10 +16,16 @@ server.use(
     cors()
 );
 
-const PORT = process.env.PORT || 4242;
+const PORT = process.env.PORT || 4300;
+
+
+
+server.use('/projects', projectRouter);
+
+server.use('/actions', actionRouter);
 
 
 
 server.listen(PORT, ()=>{
-    console.log("Please Work");
+    console.log("index.js working");
 })
